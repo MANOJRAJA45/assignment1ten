@@ -12,41 +12,122 @@
 	<div id="container">
 
 	<!-- Start your code from here -->
-	<div class="leaf-page">
-		<div class="card">
-			<div class="cardpicture">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1145795/plant-1.png" alt="a green leafy plant"/>
+	<main>
+		<form class="form">
+			<div class="info">
+				<p><label class='label'>Characters:</label><span class="count">0</span></p>
+				<p><label class='label'>Threads:</label><span class="threadCount">0</span></p>
 			</div>
-			<div class="cardmessage">
-				<h3>A leafy one</h3>
-				<p>In every change, in every falling leaf there is some pain, some beauty. And that's the way new leaves grow</p>
-				<p><a href="https://simple.wikipedia.org/wiki/Leaf#:~:text=A%20leaf%20is%20an%20above,stomata%2C%20which%20open%20and%20close.">So Leafy</a></p>
-
-			</div>
-		</div>
-		<div class="card">
-			<div class="cardpicture">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1145795/plant-4.png" alt="some pointy plants"/>
-			</div>
-			<div class="cardmessage">
-				<h3>Some pointy ones</h3>
-				<p>In every change, in every falling leaf there is some pain, some beauty. And that's the way new leaves grow</p>
-				<p><a href="https://simple.wikipedia.org/wiki/Leaf#:~:text=A%20leaf%20is%20an%20above,stomata%2C%20which%20open%20and%20close.">So Leafy</a></p>
-
-			</div>
-		</div>
+			<div class="container">
+				<textarea class="textarea" placeholder="The character limit for each thread in this text area is 275" required wrap="soft" onkeyup="textInfo(this);"></textarea>
+	<button type="submit" class="btn">Thread</button>
+            </div>
 		
-	</div>
-	
+		</form>
 
-	<!-- End your code -->
+		<div class="thread-box">
+			<div class="thread">
+				<span class="sl"> </span><br />
+			    .    Your threads will appear here <br />
+				the character limit for each thread is 275.<br /> <br />
+			</div>
+		</div>
+	</main>
+
+
+
+
 
 	</div>
 
 	<script type="text/javascript">
+const dom=(s)=>document.querySelector(s);
+const form=dom('.form');
+const charCount=dom('.count');
+const threadCount=dom('.threadCount');
+const threadBox=dom('.thread-box')
+const size=275;
+let threadArr=[]
 
-	</script>
+function textInfo(event){
+	let length=event.value.length;
+	charCount.innerHTML=length;
+	threadCount.innerHTML=Math.ceil(length/size);
+	length>size ?(event.style.color='dodgerblue'): (event.style.color='seagreen');
+}
+function displayThread(listParent,arr=[]){
+	listParent.innerHTML=arr.map((el,i)=>{
+		return  `
+		<article class='thread' data-index="${i}">
+<div class="tools">
+<span class="index">${i<9? '0'+(i+1): i+1}</span>
+<span class='close' data-index="${i}">X</span>
+	</div>
+<p class='thread-str'>
+${el}
+    </p>
+		</article>
+			
+	     
+		`;
+	}).join("")
+}
 
+function cleanThread(str){
+	let splitOnWhiteSpaces=str.split(' ');
+	let result=[];
+	let totalLength=0;
+	let sentence='';
+	for (let i=0;i<splitOnWhiteSpaces.length;i++){
+		let curWord=splitOnWhiteSpaces[i];
+		let curWordLength=curWord.length;
+
+
+
+		sentence+=curWord+' ';
+		totalLength+=curWordLength+1;
+
+		if(totalLength>=size){
+			sentence=sentence.trim();
+			let lengthDiff=sentence.length-size;
+			if(lengthDiff>0){
+				let lastIndexofWhiteSpace=sentence.lastIndexOf(' ');
+sentence=sentence.slice(0, lastIndexofWhiteSpace);
+i--
+			}
+			result.push(sentence);
+			totalLength=0;
+			sentence='';
+		}
+		if(i==splitOnWhiteSpaces.length-1 && totalLength<=size && sentence !==''){
+			result.push(sentence.trim());
+		}
+	}
+
+
+	return result;
+}
+
+function thread(e){
+	e.preventDefault();
+	const thread=dom('.thread');
+	threadArr=cleanThread(dom('.textarea').value);
+	displayThread(threadBox,threadArr)
+}
+
+form.addEventListener("submit",thread);
+
+function deleteThread(e){
+	e.preventDefault();
+	const [el,index]=[e.target,e.target.dataset.index];
+	let text=e.target.dataset.para;
+	if(el.classList.contains('close')){
+		threadArr.splice(index,1);
+		displayThread(threadBox,threadArr);
+	}
+}
+threadBox.addEventListener("click",deleteThread);
+    </script>
 </body>
 <script>
 /* DO NOT EDIT THIS CODE- WRITTERN TO PREVENT CSS CACHING */	  
@@ -57,7 +138,7 @@
 	// set the attributes for link element 
 	link.rel = 'stylesheet'; 
 	link.type = 'text/css';
-	link.href = './assignment5.css?v='+ new Date().getTime(); 
+	link.href = './assignment6.css?v='+ new Date().getTime(); 
 	// Append link element to HTML head
 	head.appendChild(link); 
 	/* DO NOT EDIT THIS CODE- WRITTERN TO PREVENT CSS CACHING */	  

@@ -1,96 +1,111 @@
-/* Our CSS file. */
-
-* {
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-html,body,.container, .content {
-width: 100%;
-height: 100%;
-padding-top: 200px;
+html{
+    font-size: 10px;
+    line-height: 1.6;
 }
 body{
-    background-color:#eee;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    width: 100%;
+    height: 140%;
+    font-size: 1.6rem;
+    background: lightblue;
+    color: #333;
 }
-.leaf-page{ 
-    height:100%;
 
+.container, .content {
+width: 100%;
+height: 100%;
 }
-.card{
+main{
+    width: 90%;
+    max-width: 90rem;
+    min-height: 55rem;
+    padding: 2rem;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.75);
+    border-radius: 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+}
+.form{
+    padding: 1rem;
+}
+.form,.form> *,.container > *{
+    border-radius: 1rem;
+}
+.info{
+    padding: 1rem;
     display: flex;
-    flex: 0 0 auto;
-    background-color: #fff;
-    max-width: 700px;
-    margin: 80px 0;
-    border-radius: 5px;
-    box-shadow:  1px 5px 7px 0px rgba(0,0,0,0.49 );
--webkit-box-shadow:  1px 5px 7px 0px rgba(0,0,0,0.49 );
--moz-box-shadow:  1px 5px 7px 0px rgba(0,0,0,0.49 );    
+    justify-content: space-evenly;
+}
+.info > p{
+    margin-right: 10px;
+}
+.info p .label{
+    font-weight: bolder;
+}
+.info > span{
+    color: #000;
+}
+.textarea{
+    width: 80%;
+    min-height: 40rem;
+    padding: 1.5rem;
+    color: black;
+    font-size: 1.9rem;
+    line-height: 1.4;
+    border: solid 1px skyblue;
+}
+.btn{
+    width: 100%;
+    margin-top: 1rem;
+padding: 1.5rem 1rem;
+border: 0;
+font-weight: bold;
+font-size: 1.8rem;
+background: linear-gradient(118deg,#42cff2,#4a66f3);
+color:#fff;
+overflow: hidden;
+transition: 0.5s linear;
+position: relative;
+}
+.thread-box {
+    min-height: 5rem;
+    display: grid;
+    grid: 1.5rem;
+    grid-template-columns: repeat(auto-fit,minmax(25rem,1fr));
 
 }
-.cardpicture{
-    border-radius: 5px 0 0 5px;
-    width: 300px;
-    flex:0 0 auto;
-    position: relative;
-    background-image: linear-gradient(to bottom,#9fd483,#8dc26f);
-
+.thread{
+    min-height: 5rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 0.75rem;
+    background: #fafdfe;
 }
-.cardpicture img {
-    position: absolute;
-    bottom: 3em;
-    left: 50%;
-    margin-left: -170px;
-    width:350px;
+.tools{
+    display: flex;
+    margin-bottom: 00.75rem;
+    justify-content: end;
+    align-items: center;
 }
-.cardmessage{
-    padding: 3em 4em 4em;
+.tools .index{
+    margin-right: auto;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    background: teal;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 2rem;
 }
-a{
-    background-color: #8dc26f;
-    color: white;
-    padding:0 25px;
-    height: 50px;
-    font-size: 0.8em;
-    letter-spacing: 1px;
-    line-height: 50px;
+.close{
+    border: 1px solid #f6f6f6;
+    cursor: pointer;
+    margin: 0 0.2rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.7rem;
     display: inline-block;
-    text-decoration: none;
-    border-radius: 25px;
-    margin-top: 1.5em;
-    border: 1px solid rgba(0,0,0,0.5 );
-}
-a:hover {
-    background-color: #70a751;
-}
-@media only screen and (max-width:790px){
-    body {
-        overflow-x:hidden;
-
-    }
-    .leaf-page {
-        margin:0 20px;
-    }
-.card {
-    flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 50px;
-
-
-}    
-.cardpicture {
-    width:100%;
-    border-radius: 5px 5px 0 0;
-}
-.cardpicture img{
-    bottom: 20px;
-    position: relative;
-}
-.cardmessage{
-    padding: 2em 2em 1em;
-}
-
 }
